@@ -7,6 +7,9 @@ public class Burner {
 		private Temperature(String s) {
 			marker=s;
 		}
+		public String toString() {
+			return marker;
+		}
 	}
 	
 	private Temperature myTemperature;
@@ -31,10 +34,13 @@ public class Burner {
 		switch(mySetting) {
 			case OFF:
 				mySetting = Setting.LOW;
+				break;
 			case LOW:
 				mySetting = Setting.MEDIUM;
+				break;
 			case MEDIUM:
 				mySetting = Setting.HIGH;
+				break;
 			case HIGH:
 				break;	
 		}
@@ -47,10 +53,13 @@ public class Burner {
 				break;
 			case LOW:
 				mySetting = Setting.OFF;
+				break;
 			case MEDIUM:
 				mySetting = Setting.LOW;
+				break;
 			case HIGH:
 				mySetting = Setting.MEDIUM;
+				break;
 		}
 	}
 	
@@ -63,52 +72,70 @@ public class Burner {
 					switch(myTemperature) {
 						case BLAZING:
 							myTemperature=Temperature.HOT;
+							break;
 						case HOT:
 							myTemperature=Temperature.WARM;
+							break;
 						case WARM:
 							myTemperature=Temperature.COLD;
+							break;
 						case COLD:
 							break;
 					}
+					break;
 				case LOW:
 					switch(myTemperature) {
 						case BLAZING:
 							myTemperature=Temperature.HOT;
+							break;
 						case HOT:
 							myTemperature=Temperature.WARM;
+							break;
 						case WARM:
 							myTemperature=Temperature.WARM;
+							break;
 						case COLD:
 							myTemperature=Temperature.WARM;
+							break;
 					}
+					break;
 				case MEDIUM:
 					switch(myTemperature) {
 						case BLAZING:
 							myTemperature=Temperature.HOT;
+							break;
 						case HOT:
 							myTemperature=Temperature.HOT;
+							break;
 						case WARM:
 							myTemperature=Temperature.HOT;
+							break;
 						case COLD:
 							myTemperature=Temperature.WARM;
+							break;
 					}
+					break;
 				case HIGH:
 					switch(myTemperature) {
 						case BLAZING:
 							break;
 						case HOT:
 							myTemperature=Temperature.BLAZING;
+							break;
 						case WARM:
 							myTemperature=Temperature.HOT;
+							break;
 						case COLD:
 							myTemperature=Temperature.WARM;
+							break;
 					}
+					break;
 			}
 		}
 	}
 	
 	public void display() {
-		System.out.println(mySetting.toString()+".... "+myTemperature.marker);
+		System.out.println("["+mySetting.toString()+"].... "+myTemperature.toString());
 	}
 
 }
