@@ -2,8 +2,11 @@
 public class Burner {
 	
 	public enum Temperature{
-		BLAZING,HOT,WARM,COLD;
-		
+		BLAZING("VERY HOT!"),HOT("Careful!"),WARM("Warm"),COLD("Cool");
+		private String marker;
+		private Temperature(String s) {
+			marker=s;
+		}
 	}
 	
 	private Temperature myTemperature;
@@ -20,7 +23,7 @@ public class Burner {
 	public Burner() {
 		myTemperature = Temperature.COLD;
 		mySetting = Setting.OFF;	
-		
+		timer=0;
 	}
 	
 	public void plusButton() {
@@ -52,16 +55,60 @@ public class Burner {
 	}
 	
 	public void updateTemperature(){
-		
+		timer--;
+		if(timer==0) {
+			timer=TIME_DURATION;
+			switch(mySetting) {
+				case OFF:
+					switch(myTemperature) {
+						case BLAZING:
+							myTemperature=Temperature.HOT;
+						case HOT:
+							myTemperature=Temperature.WARM;
+						case WARM:
+							myTemperature=Temperature.COLD;
+						case COLD:
+							break;
+					}
+				case LOW:
+					switch(myTemperature) {
+						case BLAZING:
+							myTemperature=Temperature.HOT;
+						case HOT:
+							myTemperature=Temperature.WARM;
+						case WARM:
+							myTemperature=Temperature.WARM;
+						case COLD:
+							myTemperature=Temperature.WARM;
+					}
+				case MEDIUM:
+					switch(myTemperature) {
+						case BLAZING:
+							myTemperature=Temperature.HOT;
+						case HOT:
+							myTemperature=Temperature.HOT;
+						case WARM:
+							myTemperature=Temperature.HOT;
+						case COLD:
+							myTemperature=Temperature.WARM;
+					}
+				case HIGH:
+					switch(myTemperature) {
+						case BLAZING:
+							break;
+						case HOT:
+							myTemperature=Temperature.BLAZING;
+						case WARM:
+							myTemperature=Temperature.HOT;
+						case COLD:
+							myTemperature=Temperature.WARM;
+					}
+			}
+		}
 	}
 	
 	public void display() {
-		System.out.println(mySetting.toString());
+		System.out.println(mySetting.toString()+".... "+myTemperature.marker);
 	}
-	
-	
-	
-	
-	
-	
+
 }
